@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slide Puzzle Game</title>
+  <style>
+    #puzzle-container {
+      width: 300px;
+      height: 300px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+    }
+
+    .puzzle-block {
+      background: #007BFF;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Slide Puzzle Game</h1>
+  <div id="puzzle-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
