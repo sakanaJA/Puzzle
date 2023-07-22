@@ -1,10 +1,9 @@
-// Create the initial state of the puzzle
 let puzzle = [1, 2, 3, 4, 5, 6, 7, 8, null];
-// Shuffle the puzzle
 puzzle = puzzle.sort(() => Math.random() - 0.5);
 
-// Draw the puzzle
 const container = document.querySelector('#puzzle-container');
+let time = 0;
+let timerInterval;
 
 puzzle.forEach((number, index) => {
   const block = document.createElement('div');
@@ -17,20 +16,26 @@ puzzle.forEach((number, index) => {
   container.appendChild(block);
 });
 
-// Swap blocks
+startTimer();
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    time += 1;
+    document.querySelector('#timer').textContent = `Time: ${time} seconds`;
+  }, 1000);
+}
+
 function swapBlocks(event) {
   const clickedBlockIndex = parseInt(event.target.dataset.index);
   const emptyBlockIndex = puzzle.indexOf(null);
 
-  // Check if the clicked block is next to the empty block
   if (
     [clickedBlockIndex - 1, clickedBlockIndex + 1, clickedBlockIndex - 3, clickedBlockIndex + 3].includes(emptyBlockIndex)
   ) {
-    // Swap the clicked block and the empty block
     [puzzle[clickedBlockIndex], puzzle[emptyBlockIndex]] = [puzzle[emptyBlockIndex], puzzle[clickedBlockIndex]];
 
-    // Redraw the puzzle
     container.innerHTML = '';
+
     puzzle.forEach((number, index) => {
       const block = document.createElement('div');
       block.className = 'puzzle-block';
@@ -41,5 +46,19 @@ function swapBlocks(event) {
       }
       container.appendChild(block);
     });
+
+    if (isPuzzleSolved()) {
+      clearInterval(timerInterval);
+      alert(`遊んでくれてありがとう！こんだけ時間はくさんにつかってくれたよ： ${time} seconds.`);
+    }
   }
+}
+
+function isPuzzleSolved() {
+  for (let i = 0; i < 8; i++) {
+    if (puzzle[i] !== i + 1) {
+      return false;
+    }
+  }
+  return true;
 }
