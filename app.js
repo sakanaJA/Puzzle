@@ -49,7 +49,7 @@ function swapBlocks(event) {
 
     if (isPuzzleSolved()) {
       clearInterval(timerInterval);
-      alert(`遊んでくれてありがとう！こんだけ時間はくさんにつかってくれたよ： ${time} seconds.`);
+      alert(`遊んでくれてありがとう！これだけの時間をはくさんにつかってくれたよ→ ${time} seconds.`);
     }
   }
 }
